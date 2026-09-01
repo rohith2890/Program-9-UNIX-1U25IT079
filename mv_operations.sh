@@ -1,51 +1,35 @@
 #!/bin/bash
 
-# Ensure execution stops if any command fails
+# Ensure script stops if an error occurs
 set -e
 
-echo "Starting mv command operations assignment..."
-
-# Setup: Creating a dummy environment for demonstration
-mkdir -p source_dir target_dir multipath_dir inner_dir
-touch file1.txt file2.txt file3.txt move_me.txt rename_me.txt
+echo "=== Starting mv command operations ==="
 
 # -------------------------------------------------------------
+# Setup: Creating temporary files and directories for demonstration
+# -------------------------------------------------------------
+mkdir -p dir1 dir2 destination_dir
+touch file1.txt file2.txt file3.txt rename_me.txt
+
 # 1. Move a file from one directory to another
-# -------------------------------------------------------------
-echo "Task 1: Moving move_me.txt to target_dir/"
-mv move_me.txt target_dir/
+echo "1. Moving file1.txt into dir1..."
+mv file1.txt dir1/
 
-# -------------------------------------------------------------
 # 2. Rename a file using mv
-# -------------------------------------------------------------
-echo "Task 2: Renaming rename_me.txt to renamed_file.txt"
-mv rename_me.txt renamed_file.txt
+echo "2. Renaming rename_me.txt to choice.txt..."
+mv rename_me.txt choice.txt
 
-# -------------------------------------------------------------
 # 3. Move multiple files into a directory
-# -------------------------------------------------------------
-echo "Task 3: Moving file1.txt, file2.txt, and file3.txt into multipath_dir/"
-mv file1.txt file2.txt file3.txt multipath_dir/
+echo "3. Moving file2.txt and file3.txt into dir2..."
+mv file2.txt file3.txt dir2/
 
-# -------------------------------------------------------------
 # 4. Move a directory into another directory
-# -------------------------------------------------------------
-echo "Task 4: Moving inner_dir/ into source_dir/"
-mv inner_dir source_dir/
+echo "4. Moving dir1 into destination_dir..."
+mv dir1 destination_dir/
 
-# -------------------------------------------------------------
 # 5. Use relative paths in Linux shell commands
-# -------------------------------------------------------------
-echo "Task 5: Moving a file from source_dir/inner_dir using relative paths"
-# Creating a file inside the nested directory
-touch source_dir/inner_dir/relative_test.txt
-# Moving it up to the current working directory using relative paths
-mv ./source_dir/inner_dir/relative_test.txt ./
+echo "5. Using relative paths to move choice.txt..."
+# Moving from the current directory into the newly nested dir1 directory
+mv ./choice.txt ./destination_dir/dir1/
 
-echo "All tasks executed successfully!"
-
-nano mv_operations.sh
-
-chmod +x mv_operations.sh
-
-./mv_operations.sh
+echo "=== All operations completed successfully ==="
