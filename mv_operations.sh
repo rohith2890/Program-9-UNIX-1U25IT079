@@ -1,59 +1,34 @@
-
 #!/bin/bash
 
-# ==============================================================================
-# Assignment: Linux mv Command Operations
-# Aim: To move or rename files and directories using the Linux mv command.
-# ==============================================================================
+# Ensure a clean workspace for demonstration
+echo "Setting up demo files and directories..."
+mkdir -p source_dir target_dir parent_dir/child_dir
+echo "Hello World" > file1.txt
+echo "Test File" > file2.txt
+echo "Data File" > file3.txt
+echo "----------------------------------------"
 
-echo "=== Starting Linux mv Command Assignment ==="
+# 1. Move a file from one directory to another
+echo "1. Moving file1.txt to target_dir/..."
+mv file1.txt target_dir/
 
-# Setup: Creating a dummy environment for demonstration purposes
-mkdir -p source_dir dest_dir multi_move_dir nested_dir
-echo "This is file 1" > file1.txt
-echo "This is file 2" > file2.txt
-echo "This is file 3" > file3.txt
-echo "This is file 4" > file4.txt
+# 2. Rename a file using mv
+echo "2. Renaming file2.txt to renamed_file.txt..."
+mv file2.txt renamed_file.txt
 
-# ------------------------------------------------------------------------------
-# Objective 1: Move a file from one directory to another
-# ------------------------------------------------------------------------------
-echo "Executing Objective 1: Moving file1.txt to source_dir/..."
-mv file1.txt source_dir/
+# 3. Move multiple files into a directory
+echo "3. Moving renamed_file.txt and file3.txt to target_dir/..."
+mv renamed_file.txt file3.txt target_dir/
 
+# 4. Move a directory into another directory
+echo "4. Moving target_dir/ into parent_dir/..."
+mv target_dir parent_dir/
 
-# ------------------------------------------------------------------------------
-# Objective 2: Rename a file using mv
-# ------------------------------------------------------------------------------
-echo "Executing Objective 2: Renaming file2.txt to renamed_file2.txt..."
-mv file2.txt renamed_file2.txt
+# 5. Use relative paths in Linux shell commands
+echo "5. Using relative paths to move a file from inside parent_dir..."
+# Moving the child directory up one level relatively
+mv parent_dir/child_dir ./moved_child_dir
 
-
-# ------------------------------------------------------------------------------
-# Objective 3: Move multiple files into a directory
-# ------------------------------------------------------------------------------
-echo "Executing Objective 3: Moving file3.txt and file4.txt into multi_move_dir/..."
-mv file3.txt renamed_file2.txt multi_move_dir/
-
-
-# ------------------------------------------------------------------------------
-# Objective 4: Move a directory into another directory
-# ------------------------------------------------------------------------------
-echo "Executing Objective 4: Moving nested_dir/ inside dest_dir/..."
-mv nested_dir dest_dir/
-
-
-# ------------------------------------------------------------------------------
-# Objective 5: Use relative paths in Linux shell commands
-# ------------------------------------------------------------------------------
-echo "Executing Objective 5: Moving a file using a relative path (../)..."
-# Changing directory to demonstrate relative path navigation
-cd source_dir
-mv file1.txt ../dest_dir/
-cd ..
-
-echo "=== All mv operations executed successfully ==="
-
-chmod +x mv_operations.sh
-
-./mv_operations.sh
+echo "----------------------------------------"
+echo "Operations complete! Current directory contents:"
+ls -R parent_dir moved_child_dir
